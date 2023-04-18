@@ -1,0 +1,12 @@
+cin>>n>>m;
+for(i=1;i<=n;i++)
+for(j=1;j<=m;j++)scanf("%d",&a[i][j]);
+ans=0;
+for(i=1;i<=n;i++)
+for(j=1;j<=m;j++)
+if(a[i][j]==1)
+{ 
+	f[i][j]=min(f[i-1][j],min(f[i-1][j-1],f[i][j-1]))+1;
+	if(ans<f[i][j])ans=f[i][j];
+}
+cout<<ans<<endl;

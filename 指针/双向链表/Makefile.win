@@ -1,0 +1,31 @@
+# Project: 项目2
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = list.o list_test.o
+LINKOBJ  = list.o list_test.o
+LIBS     = -L"D:/LenovoSoftstore/Install/DevC/MinGW64/lib" -L"D:/LenovoSoftstore/Install/DevC/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"D:/LenovoSoftstore/Install/DevC/MinGW64/include" -I"D:/LenovoSoftstore/Install/DevC/MinGW64/x86_64-w64-mingw32/include" -I"D:/LenovoSoftstore/Install/DevC/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"D:/LenovoSoftstore/Install/DevC/MinGW64/include" -I"D:/LenovoSoftstore/Install/DevC/MinGW64/x86_64-w64-mingw32/include" -I"D:/LenovoSoftstore/Install/DevC/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/LenovoSoftstore/Install/DevC/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = 项目2.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+list.o: list.c
+	$(CPP) -c list.c -o list.o $(CXXFLAGS)
+
+list_test.o: list_test.c
+	$(CPP) -c list_test.c -o list_test.o $(CXXFLAGS)
