@@ -1,0 +1,14 @@
+#也是非常经典的makefile文件,可以一键生成所有可执行文件和一键删除所有可执行文件
+src =$(wildcard *c)
+target = $(patsubst %.c, %, $(src))
+obj = $(patsubst %.c, %.o, $(src))
+ 
+ALL:$(target)
+
+$(target):%:%.c #这一行非常有意思,如果不加其前面的target,则终端会直接用.c来生成可执行,加上之后才能通过我这种方式运行
+	gcc -g $< -o $@ 
+
+clean:
+	-rm -rf $(target) $(obj)
+
+.PHONY: clean ALL
