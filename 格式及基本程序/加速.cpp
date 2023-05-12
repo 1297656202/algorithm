@@ -20,7 +20,11 @@ inline void in(int &x)
    while(ch>='0'&&ch<='9'){s=s*10+ch-'0';ch=getchar();}
    x=s*w;
 }
-cin.sync_with_stdio(false);
+
+ios::sync_with_stdio(false);
+cin.tie(0);
+cout.tie(0);
+
 void print(ll x)
 {
 	if(x<0){putchar('-');x=-x;}
