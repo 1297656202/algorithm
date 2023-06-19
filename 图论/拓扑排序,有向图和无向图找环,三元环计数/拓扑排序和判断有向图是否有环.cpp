@@ -21,3 +21,8 @@ while(!q.empty())
 if(cnt!=n)printf("NO SOLUTION");
 else for(i=1;i<=n;i++)
 printf("%lld ",ans[i]);
+
+当然还有一种dfs写法,不过我有点没印象() 
+
+拓扑排序能遍历完的图为有向无环图,也就是拓扑图
+所以也可以通过是否能拓扑排序完来检验有向图是否有环 
