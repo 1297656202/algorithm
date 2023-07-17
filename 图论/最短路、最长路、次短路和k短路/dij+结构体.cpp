@@ -15,12 +15,9 @@ struct ww//结构体式写法
 	friend bool operator<(ww a,ww b){return a.d>b.d;}//<为从大到小排列，>为从小到大排列 
 };
 priority_queue<ww>q;
-void add(ll x,ll y,ll v)
+void add(ll x,ll y,ll z)
 {
-	cnt++;
-    a[cnt].to=y;
-	a[cnt].next=h[x];
-	a[cnt].z=v;
+	a[++cnt]=(w){h[x],y,z};
 	h[x]=cnt;
 }
 int main()
@@ -30,7 +27,7 @@ int main()
 	cin>>n>>m;
 	for(i=1;i<=m;i++)
 	{
-		cin>>x>>y>>z;
+		scanf("%lld%lld%lld",&x,&y,&z);
 		add(x,y,z);
 		add(y,x,z);
 	}
