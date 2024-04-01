@@ -1,11 +1,11 @@
 ll erlis()
 {ll i,l,r,mid,len=1;
-	d[1]=a[1];//d[i]±íÊ¾³¤¶ÈÎªiµÄÉÏÉı×ÓĞòÁĞ×îºóÒ»¸öÊı×îĞ¡Îªd[i]
+	d[1]=a[1];//d[i]è¡¨ç¤ºé•¿åº¦ä¸ºiçš„ä¸Šå‡å­åºåˆ—æœ€åä¸€ä¸ªæ•°æœ€å°ä¸ºd[i]
 	for(i=2;i<=n;i++)
 	{ 
 		l=1;r=len;
 		if(d[len]<a[i]){len++;d[len]=a[i];continue;}
-		while(l<=r) //¶ş·Ö²éÕÒÇóÏÂ½ç
+		while(l<=r) //äºŒåˆ†æŸ¥æ‰¾æ±‚ä¸‹ç•Œ
 		{ 
 			mid=(l+r)/2;
 			if(d[mid]<a[i])l=mid+1;
@@ -18,12 +18,12 @@ ll erlis()
 
 ll erlis()
 {ll i,l,r,mid,len=1,ret;
-	d[1]=a[1];//d[i]±íÊ¾³¤¶ÈÎªiµÄÉÏÉı×ÓĞòÁĞ×îºóÒ»¸öÊı×îĞ¡Îªd[i]
+	d[1]=a[1];//d[i]è¡¨ç¤ºé•¿åº¦ä¸ºiçš„ä¸Šå‡å­åºåˆ—æœ€åä¸€ä¸ªæ•°æœ€å°ä¸ºd[i]
 	for(i=2;i<=n;i++)
 	{ 
 		l=1;r=len;
 		if(d[len]<a[i]){len++;d[len]=a[i];continue;}
-		while(l<=r) //¶ş·Ö²éÕÒÇóÏÂ½ç
+		while(l<=r) //äºŒåˆ†æŸ¥æ‰¾æ±‚ä¸‹ç•Œ
 		{ 
 			mid=(l+r)/2;
 			if(d[mid]>a[i]){r=mid-1;ret=mid;}

@@ -1,24 +1,84 @@
-È»ºó£¬Ê÷×´Êı×é¶ÔÓÚºÜ¶àÂú×ã¿ÉÀÛ»ıĞÔÖÊµÄËã·¨¶¼ÊÊÓÃ£¬Ö»ÊÇĞèÒªÄ§¸ÄÒ»ÏÂ¾ÍĞĞ£¬±ÈÈçËµÇómaxºÍxorÖµ
+ç„¶åï¼Œæ ‘çŠ¶æ•°ç»„å¯¹äºå¾ˆå¤šæ»¡è¶³å¯ç´¯ç§¯æ€§è´¨çš„ç®—æ³•éƒ½é€‚ç”¨ï¼Œåªæ˜¯éœ€è¦é­”æ”¹ä¸€ä¸‹å°±è¡Œï¼Œæ¯”å¦‚è¯´æ±‚maxå’Œxorå€¼
  
-ÓĞÒ»¸ö³õÊ¼Îª¿ÕµÄĞòÁĞ¡£Î¬»¤ÈıÖÖÃüÁî£º
-p1.ADD x£º°Ñx¼Óµ½ÊıÁĞ×îºó£»
-p2.REMOVE x£ºÔÚÊıÁĞÖĞÕÒµ½µÈÓÚxµÄÊı£¬É¾³ı
-p3.XOR between x1 and x2£º¶ÔÓÚÊıÁĞÖĞËùÓĞÖµÔÚ[x1,x2]ÖĞµÄÊıÒì»ò²¢
-Êä³ö½á¹û£»
-n ¼ÓÈëµÄÊı¶¼²»³¬¹ı20000£¬Ñ¯ÎÊ´ÎÊı<=60000 
+æœ‰ä¸€ä¸ªåˆå§‹ä¸ºç©ºçš„åºåˆ—ã€‚ç»´æŠ¤ä¸‰ç§å‘½ä»¤ï¼š
+p1.ADD xï¼šæŠŠxåŠ åˆ°æ•°åˆ—æœ€åï¼›
+p2.REMOVE xï¼šåœ¨æ•°åˆ—ä¸­æ‰¾åˆ°ç­‰äºxçš„æ•°ï¼Œåˆ é™¤
+p3.XOR between x1 and x2ï¼šå¯¹äºæ•°åˆ—ä¸­æ‰€æœ‰å€¼åœ¨[x1,x2]ä¸­çš„æ•°å¼‚æˆ–å¹¶
+è¾“å‡ºç»“æœï¼›
+n åŠ å…¥çš„æ•°éƒ½ä¸è¶…è¿‡20000ï¼Œè¯¢é—®æ¬¡æ•°<=60000 
 
-¶ÔÓÚRemove²Ù×÷£¬ÎÒÃÇÆäÊµ¿ÉÒÔ½«ÆäÊÓÎªAdd²Ù×÷¡£ÒòÎªa xor a=0£»a xor 0=a£¬ËùÒÔRemove(X)Ïàµ±ÓÚadd(X)
-È»ºó£¬¾Í°ÑÊ÷×´Êı×éµÄ´úÂëÖ±½ÓÌ×ÉÏÈ¥£¬Ö»ÊÇ°Ñ+¸Ä³Éxor¾ÍĞĞ
+å¯¹äºRemoveæ“ä½œï¼Œæˆ‘ä»¬å…¶å®å¯ä»¥å°†å…¶è§†ä¸ºAddæ“ä½œã€‚å› ä¸ºa xor a=0ï¼›a xor 0=aï¼Œæ‰€ä»¥Remove(X)ç›¸å½“äºadd(X)
+ç„¶åï¼Œå°±æŠŠæ ‘çŠ¶æ•°ç»„çš„ä»£ç ç›´æ¥å¥—ä¸Šå»ï¼Œåªæ˜¯æŠŠ+æ”¹æˆxorå°±è¡Œ
 
-ÏÂÃæÊÇÄ§¸ÄmaxµÄËã·¨ 
-void add(ll x,ll z)
-{ll i;
-	for(i=x;i<=k;i+=low(i))
-            c[i]=max(z,c[i]); 
+ä¸‹é¢æ˜¯é­”æ”¹maxçš„ç®—æ³• 
+hdu1754çš„ä»£ç ï¼Œè¿™ä¸€é¢˜å°±æ˜¯ä¸€é“å•ç‚¹ä¿®æ”¹å’ŒåŒºé—´æŸ¥è¯¢æœ€å¤§å€¼çš„é¢˜ã€‚
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+using namespace std;
+
+const int MAXN = 3e5;
+int a[MAXN], h[MAXN];
+int n, m;
+
+int lowbit(int x)
+{
+    return x & (-x);
 }
-ll ask(ll x)
-{ll i,ans=0;
-	for(i=x;i>0;i-=low(i))
-	         ans=max(c[i],ans);
-	return ans;
+void updata(int x)
+{
+    int lx, i;
+    while (x <= n)
+    {
+        h[x] = a[x];
+        lx = lowbit(x);
+        for (i=1; i<lx; i<<=1)
+            h[x] = max(h[x], h[x-i]);
+        x += lowbit(x);
+    }       
+}
+int query(int x, int y)
+{
+    int ans = 0;
+    while (y >= x)
+    {
+        ans = max(a[y], ans);
+        y --;
+        for (; y-lowbit(y) >= x; y -= lowbit(y))
+            ans = max(h[y], ans);
+    }
+    return ans;
+}
+int main()
+{
+    int i, j, x, y, ans;
+    char c;
+    while (scanf("%d%d",&n,&m)!=EOF)
+    {
+        for (i=1; i<=n; i++)
+            h[i] = 0;
+        for (i=1; i<=n; i++)
+        {
+            scanf("%d",&a[i]);
+            updata(i);
+        }
+        for (i=1; i<=m; i++)
+        {
+            scanf("%c",&c);
+            scanf("%c",&c);
+            if (c == 'Q')
+            {
+                scanf("%d%d",&x,&y);
+                ans = query(x, y);
+                printf("%d\n",ans);
+            }
+            else if (c == 'U')
+            {
+                scanf("%d%d",&x,&y);
+                a[x] = y;
+                updata(x);
+            }
+        }
+    }
+    return 0;
 }
